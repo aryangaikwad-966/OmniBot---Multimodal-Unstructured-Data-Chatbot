@@ -2,7 +2,7 @@
 
 # OmniBot
 
-### Multimodal Unstructured Data Model
+### Multimodal Unstructured Data Chatbot
 
 Read PDFs, notes, images, audio, and videos from a simple terminal chat.
 
