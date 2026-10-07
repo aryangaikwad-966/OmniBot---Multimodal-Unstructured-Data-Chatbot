@@ -2,7 +2,7 @@
 
 # OmniBot
 
-### One place to ask questions about all your files.
+### Multimodal Unstructured Data Model
 
 Read PDFs, notes, images, audio, and videos from a simple terminal chat.
 
