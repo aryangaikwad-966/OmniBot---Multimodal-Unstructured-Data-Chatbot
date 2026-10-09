@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>OmniBot · Omni</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div class="brand-mark">O</div>
+        <div>
+          <h1>OmniBot</h1>
+          <p>Ask anything from any file</p>
+        </div>
+        <span class="status"><i></i> Local workspace</span>
+      </header>
+
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">MULTIMODAL KNOWLEDGE BASE</p>
+          <h2>Meet <span>Omni.</span></h2>
+          <p class="intro">Upload your notes, reports, images, audio, or video. Omni finds the answer in your files.</p>
+          <label class="upload-card" for="file-input">
+            <strong>＋ Add files</strong>
+            <span>PDF, TXT, images, audio, or video</span>
+            <input id="file-input" type="file" multiple accept=".pdf,.txt,.jpg,.jpeg,.png,.bmp,.tiff,.wav,.mp3,.m4a,.ogg,.flac,.mp4,.mkv,.avi,.mov" />
+          </label>
+          <div id="file-list" class="file-list"></div>
+        </div>
+        <div class="omni-stage" aria-label="Omni avatar">
+          <div id="omni" class="omni">
+            <span class="cloud-puff puff-a"></span>
+            <span class="cloud-puff puff-b"></span>
+            <span class="cloud-puff puff-c"></span>
+            <span class="cloud-puff puff-d"></span>
+            <div class="eye eye-left"></div>
+            <div class="eye eye-right"></div>
+            <div class="omni-glow"></div>
+          </div>
+          <span class="omni-label">OMNI <small>your personal assistant</small></span>
+          <div class="assistant-status"><i></i><span id="assistant-state">Omni is here to help</span></div>
+        </div>
+      </section>
+
+      <section class="chat-panel">
+        <div id="messages" class="messages">
+          <div class="message omni-message"><b>Omni</b><p>Hi! Add a file and I’ll help you explore it.</p></div>
+        </div>
+        <form id="ask-form" class="ask-form">
+          <input id="question" autocomplete="off" placeholder="Ask a question about your files..." />
+          <button type="submit" aria-label="Send question">↗</button>
+        </form>
+        <p id="hint" class="hint">Your files stay local while OmniBot is running.</p>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>

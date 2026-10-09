@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap");
+
+:root { --ink: #111316; --muted: #687477; --aqua: #707980; --cloud: #c9cbcf; --cloud-dark: #9da4ab; --pale: #f1f3f5; --line: #dfe3e6; }
+* { box-sizing: border-box; }
+body { margin: 0; color: var(--ink); background: #f8fbfa; font-family: "DM Sans", sans-serif; }
+.app-shell { max-width: 1120px; min-height: 100vh; margin: auto; padding: 28px 34px 46px; }
+.topbar { display: flex; align-items: center; gap: 12px; }
+.brand-mark { display: grid; place-items: center; width: 38px; height: 38px; color: white; background: var(--ink); border-radius: 12px; font: 700 21px "Space Grotesk"; }
+h1, h2, p { margin: 0; } h1 { font: 700 20px "Space Grotesk"; } .topbar p { color: var(--muted); font-size: 12px; margin-top: 2px; }
+.status { margin-left: auto; color: var(--muted); font-size: 12px; } .status i { display: inline-block; width: 7px; height: 7px; margin-right: 5px; background: #58c588; border-radius: 50%; }
+.hero { display: grid; grid-template-columns: 1fr 0.8fr; align-items: center; gap: 50px; min-height: 445px; }
+.eyebrow { color: #707980; font-size: 11px; font-weight: 700; letter-spacing: 2px; } h2 { margin: 11px 0 14px; font: 700 clamp(46px, 7vw, 76px) "Space Grotesk"; letter-spacing: -4px; } h2 span { color: var(--cloud-dark); }
+.intro { max-width: 390px; color: var(--muted); line-height: 1.7; font-size: 15px; }
+.upload-card { display: flex; flex-direction: column; gap: 5px; width: min(100%, 360px); margin-top: 28px; padding: 18px 20px; cursor: pointer; border: 1px dashed #bbc2c8; border-radius: 16px; background: var(--pale); transition: .2s; }
+.upload-card:hover { border-color: var(--cloud-dark); transform: translateY(-2px); } .upload-card strong { font-size: 14px; } .upload-card span { color: var(--muted); font-size: 12px; } input[type=file] { display: none; }
+.file-list { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 11px; } .file-pill { padding: 6px 10px; color: #5d666e; border-radius: 20px; background: #e3e6e9; font-size: 11px; }
+.omni-stage { display: grid; justify-items: center; } .omni { position: relative; display: grid; place-items: center; width: 220px; height: 165px; border-radius: 50%; background: var(--cloud); box-shadow: 0 25px 55px #6e788033, inset -15px -18px 0 #8d959c55; transition: transform 700ms ease, background 500ms ease; animation: cloud-float 4.5s ease-in-out infinite; }
+.cloud-puff { position: absolute; z-index: -1; display: block; border-radius: 50%; background: var(--cloud); box-shadow: inset -10px -12px 0 #8d959c42; } .puff-a { width: 112px; height: 112px; left: -47px; top: 28px; } .puff-b { width: 125px; height: 125px; left: -28px; top: -35px; } .puff-c { width: 135px; height: 135px; right: -35px; top: 8px; } .puff-d { width: 105px; height: 105px; right: 22px; top: -42px; }
+.omni::before { content: ""; position: absolute; inset: 16px; border: 1px solid #ffffff70; border-radius: inherit; } .eye { position: absolute; z-index: 2; width: 14px; height: 45px; border-radius: 50%; background: var(--ink); transition: all 500ms ease; } .eye-left { left: 88px; top: 60px; } .eye-right { left: 119px; top: 60px; }
+.omni-glow { position: absolute; width: 66px; height: 20px; top: 25px; left: 47px; border-radius: 50%; background: #ffffff70; transform: rotate(-20deg); }
+.omni-label { margin-top: 27px; font: 700 12px "Space Grotesk"; letter-spacing: 2px; } .omni-label small { display: block; margin-top: 5px; color: var(--muted); text-align: center; font: 400 11px "DM Sans"; letter-spacing: 0; }
+.assistant-status { display: flex; align-items: center; gap: 7px; margin-top: 12px; color: var(--muted); font-size: 11px; } .assistant-status i { width: 7px; height: 7px; border-radius: 50%; background: #62b77b; box-shadow: 0 0 0 4px #62b77b20; animation: pulse 1.8s ease-in-out infinite; }
+.chat-panel { max-width: 720px; margin: 0 auto; padding: 22px; border: 1px solid var(--line); border-radius: 22px; background: white; box-shadow: 0 10px 35px #203b3b0b; } .messages { min-height: 90px; max-height: 230px; overflow-y: auto; }
+.message { width: fit-content; max-width: 85%; margin-bottom: 12px; padding: 12px 15px; border-radius: 14px 14px 14px 4px; background: var(--pale); font-size: 13px; line-height: 1.5; } .message b { display: block; margin-bottom: 3px; color: #3c9da9; font-size: 11px; } .user-message { margin-left: auto; border-radius: 14px 14px 4px 14px; background: var(--ink); color: white; } .user-message b { color: var(--aqua); }
+.ask-form { display: flex; gap: 10px; margin-top: 13px; padding: 7px 7px 7px 16px; border: 1px solid var(--line); border-radius: 14px; } .ask-form input { flex: 1; border: 0; outline: 0; font: inherit; font-size: 13px; } button { width: 38px; height: 38px; color: white; border: 0; border-radius: 10px; background: var(--aqua); font-size: 22px; cursor: pointer; } button:disabled { opacity: .5; } .hint { margin-top: 10px; color: #9aa8a8; font-size: 11px; text-align: center; }
+@media (max-width: 700px) { .app-shell { padding: 22px 18px 35px; } .hero { grid-template-columns: 1fr; gap: 28px; padding: 55px 0 38px; } .omni-stage { order: -1; } .omni { width: 180px; height: 135px; } .eye-left { left: 72px; top: 49px; } .eye-right { left: 98px; top: 49px; } .omni::before { inset: 12px; } .status { display: none; } }
+@keyframes cloud-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -8px; } } @keyframes pulse { 50% { opacity: .45; transform: scale(.75); } }

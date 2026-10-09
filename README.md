@@ -80,6 +80,16 @@ OmniBot will ask for a file path:
 File path >
 ```
 
+### Browser frontend
+
+To use the minimal Omni browser interface, with the Cloudee cloud avatar and animated assistant states, start the local web server:
+
+```zsh
+python3 web_app.py
+```
+
+Then open <http://localhost:8000>. Upload supported files, wait for Omni to finish processing, and ask questions in the chat box. Omni uses the Cloudee avatar definition for idle, listening, searching, thinking, working, and success/error animations. The frontend uses the same local TF-IDF pipeline as the terminal app.
+
 Choose a guide below, enter a file path, type `done`, then ask your question.
 
 ---
