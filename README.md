@@ -14,6 +14,74 @@ Read PDFs, notes, images, audio, and videos from a simple terminal chat.
 
 ---
 
+## Browser experience
+
+Omni includes a local browser interface powered by the Cloudee avatar definition. The assistant stays visible in the center of the page and continuously cycles through its expressions while it is idle.
+
+![Omni Cloudee-style assistant avatar](frontend/omni-avatar.svg)
+
+### What the browser UI does
+
+| UI area | Behavior |
+|---|---|
+| Omni avatar | Continuously animates through the expressions from `cloudee.avatar.json` |
+| Assistant status | Shows whether Omni is available, listening, thinking, searching, excited, or suspicious |
+| Add files | Uploads one or more supported files to the local knowledge base |
+| Chat box | Sends questions to the local TF-IDF retriever |
+| Source label | Shows which uploaded file supplied the answer |
+
+Omni changes animation automatically:
+
+```text
+Idle        → continuous expression cycle
+Focus input → listening
+Typing      → thinking
+Uploading   → listening
+Searching   → searching
+Answer      → excited
+Error       → suspicious
+```
+
+No cloud account or API key is required. The browser server, extracted text, uploaded files, and search index stay on your computer while the app is running.
+
+### Start the browser UI
+
+```zsh
+cd "/Users/aryangaikwad/Desktop/OmniBot - Multimodal Unstructured Data Chatbot"
+python3 web_app.py
+```
+
+Open [http://localhost:8000](http://localhost:8000), select **Add files**, and ask Omni a question.
+
+The browser frontend is made from:
+
+- `frontend/index.html` — page structure and assistant layout
+- `frontend/style.css` — responsive cloud UI and floating animation
+- `frontend/app.js` — avatar expressions, lifecycle animations, uploads, and chat
+- `cloudee.avatar.json` — Cloudee expressions, colors, and animation sequences
+- `web_app.py` — local static-file server and API adapter
+
+### Browser API
+
+The frontend uses three local endpoints:
+
+| Endpoint | Method | Purpose |
+|---|---|---|
+| `/api/avatar` | GET | Loads the complete Cloudee avatar definition |
+| `/api/status` | GET | Returns processed files and index status |
+| `/api/upload` | POST | Extracts and indexes uploaded files |
+| `/api/ask` | POST | Retrieves an answer and source filename |
+
+Example question request:
+
+```zsh
+curl -X POST http://localhost:8000/api/ask \
+  -H "Content-Type: application/json" \
+  -d '{"question":"What is machine learning?"}'
+```
+
+---
+
 ## What is OmniBot?
 
 OmniBot turns the files you choose into a temporary, searchable knowledge base. Ask a question in plain English and it returns relevant text with the file name it came from.
@@ -27,6 +95,20 @@ OmniBot turns the files you choose into a temporary, searchable knowledge base. 
 | 🔎 | Finds the most relevant answer using TF-IDF search |
 
 No API key is required. Your files are processed locally while the program is running.
+
+### Sample files
+
+The repository includes sample content for trying each supported modality:
+
+![Sample handwritten notes used for OCR](sample_files/sample_notes.png)
+
+| Sample | Type | Try asking |
+|---|---|---|
+| `sample_files/sample_lecture.txt` | Text | “What is machine learning?” |
+| `sample_files/sample_data_science.pdf` | PDF | “What are the steps in the data science workflow?” |
+| `sample_files/sample_notes.png` | Image/OCR | “What is a function in Python?” |
+| `sample_files/sample_intro.mp3` | Audio | “What does OmniBot use to find answers?” |
+| `sample_files/sample_video.mp4` | Video | “What is quantum computing?” |
 
 ---
 
@@ -80,17 +162,7 @@ OmniBot will ask for a file path:
 File path >
 ```
 
-### Browser frontend
-
-To use the minimal Omni browser interface, with the Cloudee cloud avatar and animated assistant states, start the local web server:
-
-```zsh
-python3 web_app.py
-```
-
-Then open <http://localhost:8000>. Upload supported files, wait for Omni to finish processing, and ask questions in the chat box. Omni uses the Cloudee avatar definition for idle, listening, searching, thinking, working, and success/error animations. The frontend uses the same local TF-IDF pipeline as the terminal app.
-
-Choose a guide below, enter a file path, type `done`, then ask your question.
+For the browser experience, see [Browser experience](#browser-experience) above. For the terminal experience, choose a guide below, enter a file path, type `done`, then ask your question.
 
 ---
 

@@ -1,0 +1,25 @@
+<svg width="520" height="360" viewBox="0 0 520 360" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Omni Cloudee-style assistant avatar</title>
+  <desc id="desc">A soft silver cloud avatar with expressive dark eyes.</desc>
+  <defs>
+    <linearGradient id="cloud" x1="116" y1="66" x2="395" y2="290" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F2F3F4"/>
+      <stop offset="1" stop-color="#A6ADB3"/>
+    </linearGradient>
+    <filter id="shadow" x="34" y="34" width="452" height="298" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="20" stdDeviation="18" flood-color="#65717A" flood-opacity=".18"/>
+    </filter>
+  </defs>
+  <rect width="520" height="360" rx="28" fill="#F7F9FA"/>
+  <g filter="url(#shadow)">
+    <circle cx="137" cy="206" r="67" fill="url(#cloud)"/>
+    <circle cx="189" cy="128" r="78" fill="url(#cloud)"/>
+    <circle cx="365" cy="174" r="86" fill="url(#cloud)"/>
+    <circle cx="330" cy="105" r="66" fill="url(#cloud)"/>
+    <ellipse cx="260" cy="188" rx="146" ry="108" fill="url(#cloud)"/>
+    <ellipse cx="215" cy="116" rx="45" ry="17" fill="white" fill-opacity=".42" transform="rotate(-18 215 116)"/>
+    <ellipse cx="222" cy="187" rx="12" ry="38" fill="#111316"/>
+    <ellipse cx="298" cy="187" rx="12" ry="38" fill="#111316"/>
+  </g>
+  <text x="260" y="323" text-anchor="middle" fill="#687477" font-family="Arial, sans-serif" font-size="14" font-weight="700" letter-spacing="3">OMNI · PERSONAL ASSISTANT</text>
+</svg>
