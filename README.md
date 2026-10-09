@@ -111,21 +111,88 @@ Type `exit` to end the session.
 
 ## Architecture
 
-```text
-Files
-  │
-  ▼
-Format-specific processors
-  │
-  ▼
-Text chunks with source metadata
-  │
-  ▼
-TF-IDF vector index
-  │
-  ▼
-Question → relevant answer + source file
+OmniBot uses a local ingestion-and-retrieval pipeline. Every supported input is converted into searchable text, split into source-aware chunks, and indexed for fast question answering.
+
+### System overview
+
+```mermaid
+flowchart LR
+    U[User] --> UI[Terminal or Browser UI]
+    UI --> ING[File ingestion]
+    ING --> DET[Extension detection]
+    DET --> PROC[Format-specific processor]
+    PROC --> TXT[Extracted text]
+    TXT --> CHUNK[Chunking + source metadata]
+    CHUNK --> IDX[TF-IDF index]
+    UI --> Q[Question]
+    Q --> RET[Similarity retrieval]
+    IDX --> RET
+    RET --> ANS[Answer + source filename]
+    ANS --> UI
 ```
+
+### Supported ingestion paths
+
+```mermaid
+flowchart TD
+    INPUT[Uploaded or selected file]
+    INPUT --> TYPE{File type}
+    TYPE -->|TXT| TEXT[Text processor]
+    TYPE -->|PDF| PDF[PyMuPDF processor]
+    TYPE -->|Image| OCR[Tesseract OCR]
+    TYPE -->|Audio| AUDIO[Whisper transcription]
+    TYPE -->|Video| VIDEO[Audio extraction + Whisper]
+    TEXT --> NORMALIZE[Normalized text]
+    PDF --> NORMALIZE
+    OCR --> NORMALIZE
+    AUDIO --> NORMALIZE
+    VIDEO --> NORMALIZE
+    NORMALIZE --> CHUNKS[150-word overlapping chunks]
+    CHUNKS --> INDEX[In-memory TF-IDF index]
+```
+
+### Question-answering flow
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant UI as Browser / Terminal
+    participant App as OmniBot
+    participant Index as TF-IDF Retriever
+
+    User->>UI: Ask a question
+    UI->>App: Submit question
+    App->>Index: Vectorize question
+    Index->>Index: Compare against text chunks
+    Index-->>App: Best matching chunks
+    App-->>UI: Answer and source filename
+    UI-->>User: Display result
+```
+
+### Runtime boundaries
+
+```mermaid
+flowchart TB
+    subgraph Local machine
+        B[Browser at localhost:8000]
+        S[web_app.py]
+        T[main.py]
+        P[Processors]
+        R[TF-IDF retriever]
+        F[(Temporary uploaded files)]
+        M[(In-memory index)]
+    end
+
+    B <-->|HTTP| S
+    S --> T
+    T --> P
+    P --> F
+    P --> R
+    R --> M
+    S --> R
+```
+
+The index is built for the current session and is not persisted as a hosted database. Closing the process clears the in-memory knowledge base.
 
 ### Project structure
 
